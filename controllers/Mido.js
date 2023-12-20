@@ -144,7 +144,8 @@ controller.validation = async (req, res) => {
     res.status(initialResponse.status).json({ message: 'Request completed successfully' });
   } catch (error) {
 
-  return   res.status(500).json({ error: 'Internal Server Error' });
+     res.status(500).json({ error: 'Internal Server Error' });
+    res.json({ error: 'Internal Server Error' });
   }
 };
 
