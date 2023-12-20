@@ -24,7 +24,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use((req, res, next) => {
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    console.log('Request Protocol:', protocol);
+    next();
+});
 
 
 // app.use(myConnection(mysql, {
