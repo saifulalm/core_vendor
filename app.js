@@ -2,7 +2,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-
+const cors = require('cors');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 require('dotenv').config();
@@ -14,7 +14,7 @@ var apiRouter = require('./routes/api');
 
 
 var app = express();
-
+app.use(cors());
 app.disable('x-powered-by');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
