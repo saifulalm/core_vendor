@@ -80,7 +80,7 @@
             const tujuan = document.getElementById('tujuan').value;
 
             // Make an API request using Fetch API
-            fetch(`http://localhost:2901/api/mido/index?idtrx=${transactionid}&tujuan=${tujuan}`)
+            fetch(`http://172.27.27.80:2901/api/mido/index?idtrx=${transactionid}&tujuan=${tujuan}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
