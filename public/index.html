@@ -160,21 +160,21 @@
         <h4 class="text-break">${data.afterInject|| 'Not Available' } </h4>
       </div>
     </div>
-    <hr class="my-4">
-    <div class="row py-3">
-      <div class="col-md-4 col-12">
-        <h5>Current Quota</h5>
-        <h4 class="text-break">${data.getSubsInfo.currentQuota || 'Not Available' }</h4>
-      </div>
-      <div class="col-md-4 col-12">
-        <h5>Unit</h5>
-        <h4 class="text-break">${data.getSubsInfo.unit || 'Not Available' }</h4>
-      </div>
-      <div class="col-md-4 col-12">
-        <h5>Quota Expired Date</h5>
-        <h4 class="text-break">${data.getSubsInfo.expiryDate || 'Not Available' }</h4>
-      </div>
+   <hr class="my-4">
+  <div class="row py-3">
+    <div class="col-md-4 col-12">
+      <h5>Current Quota</h5>
+      <h4 class="text-break">${data.getSubsInfo ? data.getSubsInfo.currentQuota || 'Not Available' : 'Not Available'}</h4>
     </div>
+    <div class="col-md-4 col-12">
+      <h5>Unit</h5>
+      <h4 class="text-break">${data.getSubsInfo ? data.getSubsInfo.unit || 'Not Available' : 'Not Available'}</h4>
+    </div>
+    <div class="col-md-4 col-12">
+      <h5>Quota Expired Date</h5>
+      <h4 class="text-break">${data.getSubsInfo ? data.getSubsInfo.expiryDate || 'Not Available' : 'Not Available'}</h4>
+    </div>
+  </div>
   `;
         }
     });
