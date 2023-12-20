@@ -82,7 +82,9 @@
             // Make an API request using Fetch API
             fetch(`https://validate.vouchergrosir.com/api/mido/index?idtrx=${transactionid}&tujuan=${tujuan}`)
                 .then(response => {
-
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
                     return response.json();
                 })
                 .then(data => {
