@@ -137,7 +137,7 @@ controller.validation = async (req, res) => {
       }
 
 
-
+      res.status(404);
 
     }
 
