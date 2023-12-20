@@ -25,7 +25,10 @@ app.use(express.json());
 //app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    next();
+});
 
 // app.use(myConnection(mysql, {
 //     host: process.env.DB_HOST,
