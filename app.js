@@ -6,7 +6,7 @@ var path = require('path');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 require('dotenv').config();
-var http = require('http');
+var http = require('https');
 var jwtDecode = require('jwt-decode');
 
 
