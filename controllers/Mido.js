@@ -18,8 +18,8 @@ const controller = {};
 //Request transaksi indosat
 controller.validation = async (req, res) => {
 
-  const clientTransIdToFind = req.query.idtrx;
-  const tujuan = '62' + req.query.tujuan.slice(1);
+  const clientTransIdToFind = req.query.idtrx.replace(/\s/g, '');
+  const tujuan = '62' + req.query.tujuan.replace(/\s/g, '').slice(1);
   try {
     const axiosInstance = createAxiosInstance();
 
