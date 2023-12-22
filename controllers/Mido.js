@@ -89,6 +89,7 @@ controller.validation = async (req, res) => {
 
 
         const foundTransaction = searchdata.data.transData.find(transaction => {
+
           return transaction.client_trans_id === clientTransIdToFind;
         });
 
@@ -118,8 +119,8 @@ controller.validation = async (req, res) => {
 
           const detaildata = await axiosInstance.post(`${baseApiUrl}/service/ojoldata/MDUCDOProdApp/api/gift/status`, data ,{ headers: headerdetail });
           console.log('Found Transaction Detail:', detaildata.data);
-          res.status(200).json(detaildata.data);
-          return;
+          return res.status(200).json(detaildata.data);
+
 
         } else {
           // Transaction with the specified client_trans_id was not found
@@ -130,8 +131,8 @@ controller.validation = async (req, res) => {
 
           };
           console.log('Transaction not found');
-          res.status(404).json(resdata);
-          return;
+          return res.status(404).json(resdata);
+
         }
 
 
