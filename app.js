@@ -12,6 +12,7 @@ const jwtDecode = require('jwt-decode');
 
 const apiRouter = require('./routes/api');
 const serviceh2hRouter = require('./routes/serviceh2h');
+const callbackh2hRouter = require('./routes/callback');
 dotenv.config();
 
 const app = express();
@@ -46,6 +47,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', apiRouter);
 app.use('/api/gImexjMGhBxkiHXOpCyjxJalx', serviceh2hRouter);
+app.use('/callback/VVJcQfrbHnMvYqVZnfrYjFwmk', callbackh2hRouter);
 
 app.use((req, res, next) => {
     next(createError(404));
