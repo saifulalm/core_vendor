@@ -64,7 +64,7 @@ controller.index = async (req, res) =>{
     }
   } catch (error) {
     console.error(error);
-    // Handle other errors here, if needed
+
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 
@@ -84,11 +84,8 @@ controller.callback = async (req, res) =>{
       message: msg,
     };
 
-    // Your processing logic for statuscode 1 or other statuscodes
-
     res.send(`Callback processed for statuscode ${statuscode}`);
 
-    // Send callback using axios
     await axios.post('http://172.27.27.134:3065', rescallback);
   } catch (error) {
     console.error(error);
