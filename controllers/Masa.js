@@ -73,7 +73,7 @@ controller.index = async (req, res) =>{
 
 controller.callback = async (req, res) =>{
 
-  logToLogFile(`Response ${vendor} : ${req.query}`, customLogPath);
+  logToLogFile(`Callback ${vendor} : ${req.query}`, customLogPath);
   try {
     const { serverid, clientid, kp, msisdn, sn, msg, statuscode } = req.query;
 
