@@ -40,7 +40,7 @@ controller.index = async (req, res) =>{
     const response = await axios.get(`${baseApiUrl}/api/h2h`, {
       params: bodyData,
     });
-    // console.log(`Response ${vendor} : ${JSON.stringify(response.data)}');
+    logToLogFile(`Response ${vendor} : ${JSON.stringify(response.data)}`, customLogPath);
 
     if (response.data !== null) {
       const resdata = {
@@ -72,6 +72,8 @@ controller.index = async (req, res) =>{
 }
 
 controller.callback = async (req, res) =>{
+
+  logToLogFile(`Response ${vendor} : ${req.query}`, customLogPath);
   try {
     const { serverid, clientid, kp, msisdn, sn, msg, statuscode } = req.query;
 
