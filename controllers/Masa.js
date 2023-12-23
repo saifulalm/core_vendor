@@ -1,7 +1,8 @@
 'use strict';
 
 const axios = require('axios');
-
+const url = require('url');
+const querystring = require('querystring');
 const { logToLogFile } = require('./logger');
 const {json} = require("express");
 const customLogPath = 'logs/Masa';
@@ -73,7 +74,10 @@ controller.index = async (req, res) =>{
 
 controller.callback = async (req, res) =>{
 
-  logToLogFile(`Callback ${vendor} : ${req.query}`, customLogPath);
+  const parsedUrl = url.parse(req.url);
+  const queryParams = querystring.parse(parsedUrl.query);
+  const queryParamsString = JSON.stringify(queryParams);
+  logToLogFile(`Callback ${vendor} : ${queryParamsString}`, customLogPath);
   try {
     const { serverid, clientid, kp, msisdn, sn, msg, statuscode } = req.query;
 
