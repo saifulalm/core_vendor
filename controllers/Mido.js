@@ -127,7 +127,7 @@ controller.validation = async (req, res) => {
           const resdata = {
             idtrx: clientTransIdToFind,
             tujuan: tujuan,
-            message: 'Transaksi Tidak ditemukan, Silahkan Hubungi Customer Service ',
+            message: 'Transaksi Tidak ditemukan, Silahkan Hubungi Customer Services ',
 
           };
           console.log('Transaction not found');
