@@ -67,6 +67,7 @@ class GetRequest {
 
     async sendRequest(path, data) {
         try {
+            console.log(`Making GET request to ${this.endpoint}${path} with params:`, data);
 
 
             const response = await axios.get(`${this.endpoint}${path}`, {
