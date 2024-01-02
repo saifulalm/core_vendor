@@ -126,7 +126,7 @@ const data={username:user}
             idtrx:idtrx,
             kp: kodeproduk,
             tujuan:tujuan,
-            msg: response.error || 'Transaksi tidak terporses silahkan cek saldo dan history terlebih dahulu/',
+            msg: response.error || response.trx,
         };
     }
 
