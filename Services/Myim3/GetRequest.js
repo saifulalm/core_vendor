@@ -18,7 +18,7 @@ class GetRequest {
 
             if (!response.trx) {
                 // If the first request fails, wait and try again
-                await this.sleep(3000);
+                await this.sleep(30000);
                 response = await this.sendRequest(data.path, data.request);
                 console.log('Check Status Response Detail:', response.data);
 
