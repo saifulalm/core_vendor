@@ -12,17 +12,18 @@ class GetRequest {
             let checkbalance = await this.checkbalance(user);
 
             const data = this.prepareData(idtrx, tujuan, kodeproduk, user, pin);
-
+            console.log('Request Detail:', data.request);
             let response = await this.sendRequest(data.path, data.request);
             console.log('Response Detail:', response.data);
 
             if (!response.trx) {
                 // If the first request fails, wait and try again
                 await this.sleep(30000);
-                response = await this.sendRequest(data.path, data.request);
+                console.log('Request Detail:', data.request);
+               let checkresponse = await this.sendRequest(data.path, data.request);
                 console.log('Check Status Response Detail:', response.data);
 
-                if (response.trx) {
+                if (checkresponse.trx) {
                     // If successful response after the second attempt, handle the response
                     return this.handleResponse(response, user, idtrx, kodeproduk, tujuan, checkbalance);
                 } else {
