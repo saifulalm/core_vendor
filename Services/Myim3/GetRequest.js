@@ -21,7 +21,7 @@ class GetRequest {
                 await this.sleep(30000);
                 console.log('Request Detail:', data.request);
                let checkresponse = await this.sendRequest(data.path, data.request);
-                console.log('Check Status Response Detail:', response.data);
+                console.log('Check Status Response Detail:', checkresponse.data);
 
                 if (checkresponse.trx) {
                     // If successful response after the second attempt, handle the response
@@ -126,7 +126,7 @@ const data={username:user}
             idtrx:idtrx,
             kp: kodeproduk,
             tujuan:tujuan,
-            msg: response.error || response.trx,
+            msg: response.data.error || response.data.trx,
         };
     }
 
