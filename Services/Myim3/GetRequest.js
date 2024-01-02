@@ -12,7 +12,7 @@ class GetRequest {
             let checkbalance = await this.checkbalance(user);
 
             const data = this.prepareData(idtrx, tujuan, kodeproduk, user, pin);
-            console.log('Request Detail:', data.request);
+            console.log('Request Detail:', data);
             let response = await this.sendRequest(data.path, data.request);
             console.log('Response Detail:', response.data);
 
