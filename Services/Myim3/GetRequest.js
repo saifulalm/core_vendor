@@ -25,10 +25,10 @@ class GetRequest {
 
                 if (checkresponse.trx) {
                     // If successful response after the second attempt, handle the response
-                    return this.handleResponse(response, user, idtrx, kodeproduk, tujuan, checkbalance);
+                    return this.handleResponse(checkresponse, user, idtrx, kodeproduk, tujuan, checkbalance);
                 } else {
                     // If still unsuccessful, handle the check status response
-                    return this.handleCheckStatusResponse(response, user, idtrx, kodeproduk, tujuan, checkbalance);
+                    return this.handleCheckStatusResponse(checkresponse, user, idtrx, kodeproduk, tujuan, checkbalance);
                 }
             }
 
