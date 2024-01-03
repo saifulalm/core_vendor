@@ -23,7 +23,7 @@ class GetRequest {
                let checkresponse = await this.sendRequest(data.path, data.request);
                 console.log('Check Status Response Detail:', checkresponse.data);
 
-                if (checkresponse) {
+                if (checkresponse.trx) {
                     // If successful response after the second attempt, handle the response
                     return this.handleResponse(checkresponse, user, idtrx, kodeproduk, tujuan, checkbalance);
                 } else {
@@ -112,7 +112,7 @@ const data={username:user}
             prodname: trx.productname,
             price: trx.price,
             salobefore: checkbalance.data,
-            saldoafter: parseInt(response.saldo),
+            saldoafter: parseInt(trx.saldo),
             status: trx.status,
             trxid: trx.tid,
             msg: trx.protip,
