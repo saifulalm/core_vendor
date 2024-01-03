@@ -86,6 +86,7 @@ controller.callback = async (req, res) =>{
       serverid: serverid,
       tujuan: msisdn,
       kodeproduk: kp,
+      rc:statuscode,
       sn: statuscode === '1' ? sn : undefined, // Only include 'sn' for statuscode 1
       message: msg,
     };
