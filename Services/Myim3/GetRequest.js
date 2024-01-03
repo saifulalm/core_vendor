@@ -23,7 +23,7 @@ class GetRequest {
                let checkresponse = await this.sendRequest(data.path, data.request);
                 console.log('Check Status Response Detail:', checkresponse.data);
 
-                if (checkresponse.trx) {
+                if (checkresponse) {
                     // If successful response after the second attempt, handle the response
                     return this.handleResponse(checkresponse, user, idtrx, kodeproduk, tujuan, checkbalance);
                 } else {
@@ -102,20 +102,20 @@ const data={username:user}
     }
 
     handleResponse(response, user, idtrx, kodeproduk, tujuan, checkbalance) {
-        const { trx } = response;
+
         return {
             check:true,
             chip: user,
             idtrx:idtrx,
             kp: kodeproduk,
             tujuan:tujuan,
-            prodname: trx.productname,
-            price: trx.price,
+            prodname: response.trx.productname,
+            price: response.trx.price,
             salobefore: checkbalance.data,
-            saldoafter: parseInt(trx.saldo),
-            status: trx.status,
-            trxid: trx.tid,
-            msg: trx.protip,
+            saldoafter: parseInt(response.trx.saldo),
+            status: response.trx.status,
+            trxid: response.trx.tid,
+            msg: response.trx.protip,
         };
     }
 
