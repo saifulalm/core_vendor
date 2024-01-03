@@ -23,7 +23,7 @@ class GetRequest {
                let checkresponse = await this.sendRequest(data.path, data.request);
                 console.log('Check Status Response Detail:', checkresponse.data);
 
-                if (checkresponse) {
+                if (checkresponse.trx.status === 2) {
                     // If successful response after the second attempt, handle the response
                     return this.handleResponse(checkresponse, user, idtrx, kodeproduk, tujuan, checkbalance);
                 } else {
