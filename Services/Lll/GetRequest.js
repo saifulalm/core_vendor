@@ -4,6 +4,7 @@ const { saveTransaction } = require('../../utility/dbUtils');
 const { findTransactionByIdtrx } = require('../../utility/dbUtils');
 const { generateRandomNumber } = require('../../utility/helper');
 const { callbackisset } = require('../../utility/helper');
+const { handleSwitchValue } = require('../../utility/helper');
 const {end} = require("../../db");
 const table = 'transaction_Lll';
 class GetRequest {
@@ -14,34 +15,11 @@ class GetRequest {
         this.pass = process.env.API_PASS_Lll;
         this.pin = process.env.API_PIN_Lll;
     }
-  handleSwitchValue(value) {
-        let a, b;
 
-        switch (parseInt(value)) {
-            case 0:
-                a = b = false;
-                break;
-            case 1:
-                a = false;
-                b = true;
-                break;
-            case 2:
-                a = true;
-                b = false;
-                break;
-            case 3:
-                a = b = true;
-                break;
-            default:
-                a = b = false;
-        }
-
-        return { a, b };
-    }
 
     async index_v1(idtrx, tujuan, kodeproduk) {
 
-        var splitkp = kodeproduk.split('.');
+        let splitkp = kodeproduk.split('.');
 
         if (!splitkp){
 
@@ -55,7 +33,7 @@ class GetRequest {
         }
 
         var kp =  splitkp[0];
-        const pembeda = this.handleSwitchValue(splitkp[1]);
+        const pembeda = handleSwitchValue(splitkp[1]);
 
 
 
@@ -118,7 +96,7 @@ class GetRequest {
                 const serial = a ? await generateRandomNumber(8) : response.data.sn||null;
                 return {
                     RESP: true,
-                    GEN: this.handleSwitchValue(pembeda).a,
+                    GEN: handleSwitchValue(pembeda).a,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,
@@ -130,7 +108,7 @@ class GetRequest {
             else{
                 return {
                     RESP: true,
-                    Alih: this.handleSwitchValue(pembeda).b,
+                    Alih: handleSwitchValue(pembeda).b,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,
