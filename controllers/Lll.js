@@ -16,6 +16,19 @@ class Lll {
     }
 
 
+
+    async callback_v1(req, res) {
+        try {
+            const {serverid, clientid, statuscode, kp, msg, msisdn, sn } = req.query;
+            const result = await getRequest.callback_v1(serverid, clientid, statuscode , kp, msg, msisdn, sn || null);
+            res.json(result);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({error: 'Internal Server Error'});
+        }
+    }
+
+
 }
 
 

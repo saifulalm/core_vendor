@@ -1,8 +1,11 @@
 const axios = require('axios');
 require('dotenv').config();
 const { saveTransaction } = require('../../utility/dbUtils');
-
+const { findTransactionByIdtrx } = require('../../utility/dbUtils');
+const { generateRandomNumber } = require('../../utility/helper');
+const { callbackisset } = require('../../utility/helper');
 const {end} = require("../../db");
+const table = 'transaction_Lll';
 class GetRequest {
     constructor() {
         this.endpoint = process.env.API_ENDPOINT_Lll;
@@ -11,15 +14,10 @@ class GetRequest {
         this.pass = process.env.API_PASS_Lll;
         this.pin = process.env.API_PIN_Lll;
     }
-
-    async index_v1(idtrx, tujuan, kodeproduk) {
-
-        var splitkp = kodeproduk.split('.');
-        var kp =  splitkp[0];
-
+  handleSwitchValue(value) {
         let a, b;
 
-        switch (parseInt(splitkp[1])) {
+        switch (parseInt(value)) {
             case 0:
                 a = b = false;
                 break;
@@ -37,6 +35,28 @@ class GetRequest {
             default:
                 a = b = false;
         }
+
+        return { a, b };
+    }
+
+    async index_v1(idtrx, tujuan, kodeproduk) {
+
+        var splitkp = kodeproduk.split('.');
+
+        if (!splitkp){
+
+            return {
+                idtrx,
+                kodeproduk,
+                tujuan,
+                msg: 'Request tidak sesuai, bisa di gagalkan silahkan cek documentasi terlebih dahulu !! ',
+            };
+
+        }
+
+        var kp =  splitkp[0];
+        const pembeda = this.handleSwitchValue(splitkp[1]);
+
 
 
         const requestData = {
@@ -95,20 +115,22 @@ class GetRequest {
             }
 
             if (response.data.rc === '1') {
+                const serial = a ? await generateRandomNumber(8) : response.data.sn||null;
                 return {
                     RESP: true,
-                    GEN: a,
+                    GEN: this.handleSwitchValue(pembeda).a,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,
                      tujuan,
+                    sn:serial,
                     Msg: response.data.msg,
                 };
             }
             else{
                 return {
                     RESP: true,
-                    Alih: b,
+                    Alih: this.handleSwitchValue(pembeda).b,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,
@@ -127,6 +149,59 @@ class GetRequest {
 
 
 
+
+    }
+
+
+
+    async callback_v1(serverid,clientid,statuscode,kp,msg,msisdn,sn){
+
+
+        const foundTransaction = await findTransactionByIdtrx(table, clientid);
+
+        const pembeda = this.handleSwitchValue(foundTransaction.kodeproduk.split('.')[1]);
+
+
+
+        if (statuscode === '1') {
+            const serial = pembeda.a ? await generateRandomNumber(8) : sn;
+            var sendcallback = {
+                Callback: true,
+                Gen: pembeda.a,
+                Rc: statuscode,
+                Kode: kp,
+                idtrx: clientid,
+                tujuan: msisdn,
+                sn: serial,
+                Msg: msg,
+
+            };
+
+        } else {
+            var sendcallback = {
+                Callback: true,
+                Alih: pembeda.b,
+                Rc: statuscode,
+                Kode: kp,
+                idtrx: clientid,
+                tujuan: msisdn,
+                Msg: msg,
+
+            };
+
+        }
+
+           await axios.get(`http://172.27.27.70:2068/`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            data: sendcallback,
+        });
+
+        console.log('Callback ', sendcallback);
+
+        return callbackisset();
 
     }
 
