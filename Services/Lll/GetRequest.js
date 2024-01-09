@@ -58,7 +58,7 @@ class GetRequest {
 
                 params: requestData,
             });
-            logToLogFile(`Response ${vendor} Berhasil : ${JSON.stringify(response.data)}`, customLogPath);
+            logToLogFile(`Response ${vendor} Berhasil : ${response.data}`, customLogPath);
             const dataToSave = {
                 idtrx: idtrx,
                 tujuan: tujuan,
