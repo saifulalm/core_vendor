@@ -128,7 +128,7 @@ class GetRequest {
                 idtrx,
                 tujuan,
                 Kode: kp,
-                Msg: error.response.data.msg,
+                Msg: error.response.msg,
             };
         }
 
