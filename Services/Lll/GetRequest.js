@@ -55,10 +55,7 @@ class GetRequest {
             console.log(`Making GET request to ${this.endpoint}/api/h2h with params:`, requestData);
             logToLogFile(`Request ${vendor} : ${JSON.stringify(requestData)}`, customLogPath);
             const response = await axios.get(`${this.endpoint}/api/h2h`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
+
                 params: requestData,
             });
 
