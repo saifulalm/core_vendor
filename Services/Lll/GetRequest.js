@@ -93,7 +93,7 @@ class GetRequest {
             }
 
             if (response.data.rc === '1') {
-                const serial = a ? await generateRandomNumber(8) : response.data.sn||null;
+                const serial = pembeda.a ? await generateRandomNumber(8) : response.data.sn||null;
                 return {
                     RESP: true,
                     GEN: pembeda.a,
