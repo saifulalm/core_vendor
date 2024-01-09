@@ -175,7 +175,7 @@ class GetRequest {
 
         }
 
-           await axios.post(this.terminal, {sendcallback});
+           await axios.post(this.terminal, sendcallback);
 
         console.log('Callback ', sendcallback);
 
