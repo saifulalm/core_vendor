@@ -123,7 +123,13 @@ class GetRequest {
         } catch (error) {
 
             console.error('Error:', error);
-            throw error;
+            return {
+                RESP: true,
+                idtrx,
+                tujuan,
+                Kode: kp,
+                Msg: error.data.msg,
+            };
         }
 
 
