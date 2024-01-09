@@ -1,8 +1,8 @@
-// dbUtils.js
+
 
 const pool = require('../db');
 
-const saveTransaction = async (tablename,data) => {
+const saveTransaction = async (tableName, data) => {
     const insertQuery = `
     INSERT INTO "${tableName}" (idtrx, tujuan, kodeproduk, request, response, created_at, updated_at)
     VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -10,15 +10,8 @@ const saveTransaction = async (tablename,data) => {
     SET tujuan = $2, kodeproduk = $3, request = $4, response = $5, updated_at = $7
     RETURNING *`;
 
-    const values = [
-        data.idtrx,
-        data.tujuan,
-        data.kodeproduk,
-        data.request,
-        data.response,
-        data.create_at,
-        new Date(), // updated_at
-    ];
+    const { idtrx, tujuan, kodeproduk, request, response, created_at } = data;
+    const values = [idtrx, tujuan, kodeproduk, request, response, created_at, new Date()];
 
     try {
         const { rows } = await pool.query(insertQuery, values);

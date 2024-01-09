@@ -37,7 +37,7 @@ class GetRequest {
         }
 
         var kp =  splitkp[0];
-        const pembeda = handleSwitchValue(splitkp[1]);
+        const pembeda =await handleSwitchValue(splitkp[1]);
 
 
 
@@ -70,7 +70,7 @@ class GetRequest {
                 kodeproduk: kodeproduk,
                 request: requestData,
                 response: response.data,
-                create_at: new Date(),
+                created_at: new Date(),
             };
 
             await (async () => {
@@ -99,7 +99,7 @@ class GetRequest {
                 const serial = a ? await generateRandomNumber(8) : response.data.sn||null;
                 return {
                     RESP: true,
-                    GEN: handleSwitchValue(pembeda).a,
+                    GEN: pembeda.a,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,
@@ -111,7 +111,7 @@ class GetRequest {
             else{
                 return {
                     RESP: true,
-                    Alih: handleSwitchValue(pembeda).b,
+                    Alih: pembeda.b,
                     RC: response.data.rc,
                     Kode: kp,
                     idtrx,

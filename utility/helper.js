@@ -34,12 +34,12 @@ const handleSwitchValue = async(value) =>{
             a = b = false;
             break;
         case 1:
-            a = false;
-            b = true;
-            break;
-        case 2:
             a = true;
             b = false;
+            break;
+        case 2:
+            a = false;
+            b = true;
             break;
         case 3:
             a = b = true;
