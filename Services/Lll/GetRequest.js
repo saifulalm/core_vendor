@@ -52,12 +52,14 @@ class GetRequest {
 
 
         try {
-            console.log(`Making GET request to ${this.endpoint}/api/h2h with params:`, requestData);
+            // Convert requestData to a query string
+            const queryString = Object.keys(requestData)
+                .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(requestData[key]))
+                .join('&');
+            const url = `${this.endpoint}/api/h2h?${queryString}`;
+            console.log(`Making GET request to ${url}`);
             logToLogFile(`Request ${vendor} : ${JSON.stringify(requestData)}`, customLogPath);
-            const response = await axios.get(`${this.endpoint}/api/h2h`, {
-
-                params: requestData,
-            });
+            const response = await axios.get(url);
             logToLogFile(`Response ${vendor} Berhasil : ${response.data}`, customLogPath);
             const dataToSave = {
                 idtrx: idtrx,
