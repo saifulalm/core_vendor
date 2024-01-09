@@ -6,7 +6,10 @@ const { generateRandomNumber } = require('../../utility/helper');
 const { callbackisset } = require('../../utility/helper');
 const { handleSwitchValue } = require('../../utility/helper');
 const {end} = require("../../db");
+const {logToLogFile} = require("../../controllers/logger");
 const table = 'transaction_Lll';
+const vendor = 'LLL';
+const customLogPath = 'logs/LLL';
 class GetRequest {
     constructor() {
         this.endpoint = process.env.API_ENDPOINT_Lll;
@@ -14,6 +17,7 @@ class GetRequest {
         this.user = process.env.API_USER_Lll;
         this.pass = process.env.API_PASS_Lll;
         this.pin = process.env.API_PIN_Lll;
+        this.terminal = process.env.API_TERMINAL_LLL;
     }
 
 
@@ -51,8 +55,7 @@ class GetRequest {
 
         try {
             console.log(`Making GET request to ${this.endpoint}/api/h2h with params:`, requestData);
-
-
+            logToLogFile(`Request ${vendor} : ${JSON.stringify(requestData)}`, customLogPath);
             const response = await axios.get(`${this.endpoint}/api/h2h`, {
                 headers: {
                     'Accept': 'application/json',
@@ -72,7 +75,7 @@ class GetRequest {
 
             await (async () => {
                 try {
-                    const savedData = await saveTransaction(dataToSave);
+                    const savedData = await saveTransaction(table,dataToSave);
                     console.log('Data saved/updated successfully:', savedData);
                 } catch (error) {
                     console.error('Error saving/updating data:', error);
@@ -81,7 +84,7 @@ class GetRequest {
 
 
 
-            console.log(`Response Data :`, response);
+
 
             if (!response) {
                 return {
@@ -122,7 +125,7 @@ class GetRequest {
         } catch (error) {
 
             console.error('Error:', error);
-            throw error; // Rethrow the error if needed
+            throw error;
         }
 
 
@@ -137,7 +140,7 @@ class GetRequest {
 
         const foundTransaction = await findTransactionByIdtrx(table, clientid);
 
-        const pembeda = this.handleSwitchValue(foundTransaction.kodeproduk.split('.')[1]);
+        const pembeda = handleSwitchValue(foundTransaction.kodeproduk.split('.')[1]);
 
 
 
@@ -169,7 +172,7 @@ class GetRequest {
 
         }
 
-           await axios.get(`http://172.27.27.70:2068/`, {
+           await axios.get(`${this.terminal}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

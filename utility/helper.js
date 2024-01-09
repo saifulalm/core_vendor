@@ -26,6 +26,7 @@ const generateRandomNumber= async(length)=>{
 }
 
 const handleSwitchValue = async(value) =>{
+
     let a, b;
 
     switch (parseInt(value)) {
