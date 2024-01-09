@@ -175,13 +175,7 @@ class GetRequest {
 
         }
 
-           await axios.post(this.terminal, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            data: sendcallback,
-        });
+           await axios.post(this.terminal, {sendcallback});
 
         console.log('Callback ', sendcallback);
 
