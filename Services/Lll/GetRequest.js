@@ -25,15 +25,13 @@ class GetRequest {
 
         let splitkp = kodeproduk.split('.');
 
-        if (!splitkp){
-
+        if (!splitkp || splitkp.length < 2) {
             return {
                 idtrx,
                 kodeproduk,
                 tujuan,
                 msg: 'Request tidak sesuai, bisa di gagalkan silahkan cek documentasi terlebih dahulu !! ',
             };
-
         }
 
         var kp =  splitkp[0];
