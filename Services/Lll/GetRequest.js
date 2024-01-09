@@ -12,11 +12,11 @@ const vendor = 'LLL';
 const customLogPath = 'logs/LLL';
 class GetRequest {
     constructor() {
-        this.endpoint = process.env.API_ENDPOINT_Lll;
-        this.id = process.env.API_ID_Lll;
-        this.user = process.env.API_USER_Lll;
-        this.pass = process.env.API_PASS_Lll;
-        this.pin = process.env.API_PIN_Lll;
+        this.endpoint = process.env.API_ENDPOINT_LLL;
+        this.id = process.env.API_ID_LLL;
+        this.user = process.env.API_USER_LLL;
+        this.pass = process.env.API_PASS_LLL;
+        this.pin = process.env.API_PIN_LLL;
         this.terminal = process.env.API_TERMINAL_LLL;
     }
 
