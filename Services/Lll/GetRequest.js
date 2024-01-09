@@ -175,7 +175,7 @@ class GetRequest {
 
         }
 
-           await axios.get(`${this.terminal}`, {
+           await axios.post(`${this.terminal}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
