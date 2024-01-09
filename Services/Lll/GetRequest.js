@@ -143,8 +143,7 @@ class GetRequest {
 
 
         const foundTransaction = await findTransactionByIdtrx(table, clientid);
-
-        const pembeda = handleSwitchValue(foundTransaction.kodeproduk.split('.')[1]);
+        const pembeda = await handleSwitchValue(foundTransaction.kodeproduk.split('.')[1]);
 
 
 
